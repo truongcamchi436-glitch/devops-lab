@@ -1,0 +1,28 @@
+DevOps Lab - Nginx 故障处理记录
+日期：2026-10-22
+
+一、故障现象
+Nginx 服务停止，本机网页无法正常访问。
+
+二、故障排查
+运行服务器巡检脚本：
+bash ~/devops-lab/script/check_server.sh
+
+检测结果：
+FAIL: Nginx 未运行
+FAIL: 网页响应异常，HTTP 000
+
+三、故障恢复
+执行：
+sudo systemctl start nginx
+
+四、恢复验证
+systemctl is-active nginx
+结果：active
+
+curl -I --max-time 5 http://127.0.0.1
+结果：HTTP/1.1 200 OK
+
+五、处理结论
+已确认巡检脚本能够识别 Nginx 停止及网页访问异常。
+手动启动服务后，网页恢复正常。
